@@ -1,0 +1,169 @@
+### GET
+GET http://localhost:8080/applications
+
+### POST
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+    "company": "Apple",
+    "jobTitle": "Backend Engineer",
+    "status": "Interview"
+}
+### 수정
+PUT http://localhost:8080/applications/1
+Content-Type: application/json
+
+{
+  "company": "Google",
+  "jobTitle": "Backend Engineer",
+  "status": "Interview"
+}
+### GET
+GET http://localhost:8080/applications
+### 삭제
+DELETE http://localhost:8080/applications/1
+### jobTitle이 비어 있어서 실패
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "",
+  "status": "Applied"
+}
+### 정상 요청
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "Software Engineer",
+  "status": "Applied"
+}
+### 빈 값으로 수정 — 400
+PUT http://localhost:8080/applications/1
+Content-Type: application/json
+
+{
+  "company": "",
+  "jobTitle": "Backend Engineer",
+  "status": "Interview"
+}
+
+### 없는 번호 수정 — 404
+PUT http://localhost:8080/applications/100
+Content-Type: application/json
+
+{
+  "company": "Google",
+  "jobTitle": "Backend Engineer",
+  "status": "Interview"
+}
+
+### 정상 수정 — 200
+PUT http://localhost:8080/applications/1
+Content-Type: application/json
+
+{
+  "company": "Google",
+  "jobTitle": "Backend Engineer",
+  "status": "Interview"
+}
+### 전체 목록 확인
+GET http://localhost:8080/applications
+
+### 새 지원서 추가
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "Backend Engineer",
+  "status": "Applied"
+}
+### id 2 삭제
+DELETE http://localhost:8080/applications/2
+### 삭제 후 전체 목록
+GET http://localhost:8080/applications
+### 삭제 후 새 지원서 추가
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Apple",
+  "jobTitle": "Java Developer",
+  "status": "Applied"
+}
+### 새 지원서 추가
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "Backend Engineer",
+  "status": "Applied"
+}
+### 1. id 2 삭제
+DELETE http://localhost:8080/applications/2
+### 2. 새 지원서 추가
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Apple",
+  "jobTitle": "Java Developer",
+  "status": "Applied"
+}
+GET http://localhost:8080/applications
+### Get all applications
+GET http://localhost:8080/applications
+### Create application
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "Backend Engineer",
+  "status": "Applied"
+}
+### Get all applications
+GET http://localhost:8080/applications
+### Get application by id
+GET http://localhost:8080/applications/1
+
+### Get application by id
+GET http://localhost:8080/applications/1
+### Get application by id
+GET http://localhost:8080/applications/1
+
+### Get application by id
+GET http://localhost:8080/applications/1
+
+### Update application
+PUT http://localhost:8080/applications/1
+Content-Type: application/json
+
+{
+  "company": "Microsoft",
+  "jobTitle": "Software Engineer",
+  "status": "Interview"
+}
+
+### Get application by id
+GET http://localhost:8080/applications/1
+
+### Delete application
+DELETE http://localhost:8080/applications/1
+
+### Get deleted application
+GET http://localhost:8080/applications/1
+### Create application
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Google",
+  "jobTitle": "Software Engineer",
+  "status": "Applied"
+}

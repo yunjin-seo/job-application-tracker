@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+
+import jakarta.transaction.Transactional;
+
 @Service
 public class JobApplicationService {
 
@@ -15,40 +18,119 @@ public class JobApplicationService {
         this.repository = repository;
     }
     
+   
 
     // Service
-    public List<JobApplication> getApplications() {
-        return repository.findAll();
-    }
-
-    public JobApplication getApplication(int id) {
-        return repository.findById(id).orElse(null);
-    }
-
-
-    public JobApplication addApplication(JobApplication application) {
-        return repository.save(application);
-        //application 객체를 database에 저장해라
-    }
-
-    public JobApplication updateApplication(int id, JobApplication newApplication) {
-        if (!repository.existsById(id)) {
-            return null;
-        }
-
-        newApplication.setId(id);
-        return repository.save(newApplication);
-    }
-
-    public JobApplication deleteApplication(int id) {
+    public JobApplicationResponse getApplication(int id) {
+        JobApplication application =repository.findById(id)
+            .orElseThrow(
+                ()-> new IllegalArgumentException("Job application not found")
+            );
         
-        JobApplication application =repository.findById(id).orElse(null);
+        return new JobApplicationResponse(
+            application.getId(),
+            application.getCompany(),
+            application.getJobTitle(),
+            application.getStatus()
+        );
+    }
+    
+    public List<JobApplicationResponse> getApplications() {
 
-        if (application == null) {
-            return null;
-        }
+    List<JobApplication> applications =
+            repository.findAll();
 
-        repository.deleteById(id);
-        return application;
+    return applications.stream()
+            .map(jobApplication -> new JobApplicationResponse(
+                jobApplication.getId(),
+                jobApplication.getCompany(),
+                jobApplication.getJobTitle(),
+                jobApplication.getStatus()
+                )
+            )
+            .toList();
+    }
+    
+
+
+    public JobApplicationResponse createApplication(
+        JobApplicationRequest request) {
+
+        JobApplication jobApplication = new JobApplication(
+            request.company(),
+            request.jobTitle(),
+            request.status()
+        );
+
+        JobApplication savedJobApplication =repository.save(jobApplication);
+        return new JobApplicationResponse(
+                savedJobApplication.getId(),
+                savedJobApplication.getCompany(),
+                savedJobApplication.getJobTitle(),
+                savedJobApplication.getStatus()
+        );
+    }
+    @Transactional
+    public JobApplicationResponse updateApplication(int id, JobApplicationRequest request) {
+        JobApplication application =repository.findById(id)
+                                        .orElseThrow(
+                                        ()-> new IllegalArgumentException("Job application not found.")
+                                     );
+        application.update(
+                                request.company(),
+                                request.jobTitle(),
+                                request.status());
+        return new JobApplicationResponse(
+                application.getId(),
+                application.getCompany(),
+                application.getJobTitle(),
+                application.getStatus()
+        );
+    }
+    @Transactional 
+    public void deleteApplication(int id) {
+        JobApplication application = repository.findById(id)
+                .orElseThrow(
+                    ()-> new IllegalArgumentException("Job application not found.")
+                );
+
+        repository.delete(application);
+
+    }
+    public List<JobApplicationResponse> getApplicationsByStatus(ApplicationStatus status){
+        List<JobApplication> applications =repository.findByStatus(status);
+        return applications.stream()
+                .map(jobApplication -> new JobApplicationResponse(
+                    jobApplication.getId(), 
+                    jobApplication.getCompany(),
+                    jobApplication.getJobTitle(),
+                    jobApplication.getStatus())
+                )
+                .toList();
+                
+    }
+    public List<JobApplicationResponse> searchApplicationsByCompany(String company){
+        List<JobApplication> applications = repository.findByCompanyContainingIgnoreCase(company);
+        
+        return applications.stream()
+                            .map(application -> new JobApplicationResponse(
+                                application.getId(),
+                                application.getCompany(), 
+                                application.getJobTitle(),
+                                application.getStatus()
+                            ))
+                            .toList();
+    }
+    public List<JobApplicationResponse> searchApplicationsByJobTitle(String jobTitle){
+        List<JobApplication> applications = repository.findByJobTitleContainingIgnoreCase(jobTitle);
+        
+        return applications.stream()
+                            .map(application -> new JobApplicationResponse(
+                                application.getId(),
+                                application.getCompany(), 
+                                application.getJobTitle(),
+                                application.getStatus()
+                            ))
+                            .toList();
     }
 }

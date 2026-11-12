@@ -1,0 +1,12 @@
+### Create test application
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Netflix",
+  "jobTitle": "Backend Developer",
+  "status": "APPLIED"
+}
+
+### Search by job title
+GET http://localhost:8080/applications/search/job-title?jobTitle=BACK

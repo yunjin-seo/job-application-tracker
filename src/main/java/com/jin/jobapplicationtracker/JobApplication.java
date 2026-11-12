@@ -1,10 +1,12 @@
 package com.jin.jobapplicationtracker;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Enumerated;
 
 @Entity
 public class JobApplication {
@@ -20,13 +22,14 @@ public class JobApplication {
     @NotBlank
     private String jobTitle;
     
-    @NotBlank
-    private String status;
+    @Enumerated(EnumType.STRING)
+    // enum의 이름을 DB에 문자열로 저장
+    private ApplicationStatus status;
 
     public JobApplication() {
     
     }
-    public JobApplication(String company, String jobTitle, String status){
+    public JobApplication(String company, String jobTitle, ApplicationStatus status){
         this.company = company;
         this.jobTitle = jobTitle;
         this.status = status;
@@ -40,7 +43,7 @@ public class JobApplication {
         return jobTitle;
     }
 
-    public String getStatus(){
+    public ApplicationStatus getStatus(){
         return status;
     }
 
@@ -50,6 +53,12 @@ public class JobApplication {
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public void update(String company, String jobTitle, ApplicationStatus status){
+        this.company = company;
+        this.jobTitle = jobTitle;
+        this.status = status;
     }
 
 }

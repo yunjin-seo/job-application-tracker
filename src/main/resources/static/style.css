@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    color: #222;
+    margin: 0;
+}
+
+main {
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 24px;
+}
+
+section {
+    background: white;
+    padding: 24px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+input, select, button {
+    padding: 10px;
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+li {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+}

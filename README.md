@@ -14,6 +14,7 @@ A Spring Boot REST API for managing job application records.
 - Return appropriate HTTP status codes
 - Return structured error responses
 - Test repository queries with automated JPA tests
+- Search job applications by job title
 
 ## Tech Stack
 
@@ -41,6 +42,7 @@ Client → Controller → Service → Repository → Database
 | POST | `/applications` | Create a job application | `201 Created` |
 | PUT | `/applications/{id}` | Update a job application | `200 OK` |
 | DELETE | `/applications/{id}` | Delete a job application | `204 No Content` |
+| GET | `/applications/search/job-title?jobTitle={jobTitle}` | Search job applications by job title | `200 OK` |
 
 ## Example Request and Response
 

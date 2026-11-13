@@ -10,3 +10,17 @@ Content-Type: application/json
 
 ### Search by job title
 GET http://localhost:8080/applications/search/job-title?jobTitle=BACK
+### Create an application for deletion test
+POST http://localhost:8080/applications
+Content-Type: application/json
+
+{
+  "company": "Apple",
+  "jobTitle": "Backend Developer",
+  "status": "APPLIED"
+}
+### Delete the application
+DELETE http://localhost:8080/applications/1
+
+### Verify deletion
+GET http://localhost:8080/applications/1

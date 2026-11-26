@@ -33,12 +33,12 @@ class JobApplicationRepositoryTest {
     repository.save(google);
     repository.save(amazon);
     repository.save(microsoft);
-    // Act: 테스트할 method 실행
+
     List<JobApplication> results =
             repository.findByStatus(
                 ApplicationStatus.INTERVIEW
         );
-    // Assert: 실제 결과가 예상 결과와 같은지 검사
+        
     assertThat(results).hasSize(2);
    
     assertThat(results)

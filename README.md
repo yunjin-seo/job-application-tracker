@@ -1,20 +1,16 @@
 # Job Application Tracker
 
-A Spring Boot REST API for managing job application records.
+Track job applications with a Spring Boot application featuring a REST API and a simple web interface.
 
 ## Features
 
-- Create job applications
-- View all job applications
-- View an job application by ID
-- Filter job applications by status
-- Update job applications
-- Delete job applications
-- Validate required fields
-- Return appropriate HTTP status codes
-- Return structured error responses
-- Test repository queries with automated JPA tests
-- Search job applications by job title
+- Add, view, edit, and delete job applications
+- List all applications or one application by ID
+- Find applications based on status, company name, or job title
+- Add, edit, and delete applications using a web page interface
+- Show simple error messages
+- Run tests for database searches and service code
+- Keep application data after restarting the app
 
 ## Tech Stack
 
@@ -27,10 +23,12 @@ A Spring Boot REST API for managing job application records.
 - Jakarta Bean Validation
 - JUnit 5
 - AssertJ
+- Mockito
+- HTML, CSS, JavaScript
 
 ## Architecture
 
-Client → Controller → Service → Repository → Database
+Web page → Controller → Service → Repository → Database
 
 ## API Endpoints
 
@@ -43,6 +41,7 @@ Client → Controller → Service → Repository → Database
 | PUT | `/applications/{id}` | Update a job application | `200 OK` |
 | DELETE | `/applications/{id}` | Delete a job application | `204 No Content` |
 | GET | `/applications/search/job-title?jobTitle={jobTitle}` | Search job applications by job title | `200 OK` |
+| GET | `/applications/search?company={company}` | Search job applications by company | `200 OK` |
 
 ## Example Request and Response
 
@@ -138,24 +137,37 @@ The tests verify:
 - The number of returned applications
 - The companies contained in the results
 
+We use a fake repository to test the service.
+These tests verify how to add, find, edit, and delete applications.
+
 Run all tests with:
 
 ```bash
 ./mvnw test
 ```
 
+
 ## Running the Project
+
+Java 24 is required to run this project.
 
 1. Open the project in VS Code.
 2. Run `JobApplicationTrackerApplication.java`.
-3. Test the API at `http://localhost:8080/applications`.
+3. Open `http://localhost:8080` to add an application.
+4. Open `http://localhost:8080/applications.html` to view the list.
+
+## Data Storage
+
+The app saves applications in a local H2 file.
+The data stays after you restart the app.
+Testing takes place using a different temporary database.
+The `data/` folder is not uploaded to GitHub.
 
 ## Future Improvements
 
-- Replace the H2 database with PostgreSQL
-- Add pagination and sorting
-- Add company and job title search
-- Add service and controller tests
-- Add OpenAPI/Swagger documentation
-- Add authentication and authorization
-- Deploy the application
+- Use PostgreSQL instead of H2
+- Show results in pages and sort them
+- Add tests for the controller
+- Add API documentation
+- Add user login
+- Put the app online

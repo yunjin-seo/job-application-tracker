@@ -11,8 +11,13 @@
     <main>
         <h1>Job Application Tracker</h1>
 
+        <button type="button" id="view-applications">
+            Back to List
+        </button>
+
         <section>
-            <h2>Add an Application</h2>
+            <h2 id="form-title">Add an Application</h2>
+
             <form id="application-form">
                 <label for="company">Company</label>
                 <input id="company" name="company" required>
@@ -29,13 +34,12 @@
                 </select>
 
                 <button type="submit">Add Application</button>
+                <button type="button" id="cancel-edit" hidden>
+                    Cancel Edit
+                </button>
             </form>
-        </section>
 
-        <section>
-            <h2>Applications</h2>
             <p id="message"></p>
-            <ul id="application-list"></ul>
         </section>
     </main>
 </body>

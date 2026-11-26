@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="applications.js" defer></script>
+</head>
+<body>
+    <main>
+        <h1>Job Application Tracker</h1>
+
+        <button type="button" id="add-application">
+            Add Application
+        </button>
+
+        <section>
+            <h2>Applications</h2>
+
+            <label for="status-filter">Status</label>
+            <select id="status-filter">
+                <option value="ALL">All</option>
+                <option value="APPLIED">Applied</option>
+                <option value="INTERVIEW">Interview</option>
+                <option value="OFFERED">Offered</option>
+                <option value="REJECTED">Rejected</option>
+            </select>
+
+            <p id="message"></p>
+            <ul id="application-list"></ul>
+        </section>
+    </main>
+</body>
+</html>

@@ -13,7 +13,7 @@ public class JobApplication {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //만들어진 값 방식 id 생성을 방식을 모아 놓은 종류  자동 증가
+ 
     private int id;
     
     @NotBlank
@@ -23,7 +23,7 @@ public class JobApplication {
     private String jobTitle;
     
     @Enumerated(EnumType.STRING)
-    // enum의 이름을 DB에 문자열로 저장
+
     private ApplicationStatus status;
 
     public JobApplication() {

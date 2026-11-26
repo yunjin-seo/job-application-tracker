@@ -27,10 +27,10 @@ public class GlobalExceptionHandler {
         MethodArgumentNotValidException exception){
         
             String message = exception
-                    .getBindingResult()     // 검증 결과 가져오기
-                    .getFieldErrors()       // 실패한 필드 목록 가져오기
-                    .get(0)          // 첫 번째 오류 가져오기
-                    .getDefaultMessage();   // 직접 작성한 오류 메시지 가져오기
+                    .getBindingResult()     
+                    .getFieldErrors()       
+                    .get(0)        
+                    .getDefaultMessage();   
 
             ErrorResponse response = new ErrorResponse(message);
 
